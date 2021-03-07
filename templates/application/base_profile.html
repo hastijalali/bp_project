@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+
+       <div><a href="{% url 'application:profile' course=course %}">Assignments</a></div>
+       <div><a href="{% url 'application:logout' %}">
+           Logout
+        </a>
+        </div>
+ 
+{% block body %}
+{% endblock %}
+</body>
+</html>

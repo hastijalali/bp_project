@@ -1,0 +1,48 @@
+{% extends 'application/base.html' %}
+{% block title %}{{ sol.tiitle }}{% endblock %}
+
+{% block body %}
+
+<div >
+        <h3>{{ sol.title }}</h3>
+        <br>
+        <div>
+        {{ sol.body }}
+        </div>
+        <br>
+        <div><b>Points:</b>    {{ sol.points }}</div>
+        <br>
+        <div><b>Comments:</b>    {{ sol.comments }}</div>
+        <br>
+        <div><b>Answered by: {{ sol.student.roll_no }}</b></div>
+        <br>
+</div>
+
+{% if error_message %}
+    <div class="alert alert-danger">
+        <strong>{{ error_message }}</strong>
+    </div>
+{% endif %}
+<form role="form" action="{% url 'application:sol_detail_t' sol_id=sol.id%}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div >
+      Points:
+     <div>
+      <input id="id_points" maxlength="30" name="points" type="text">
+     </div>
+    </div>
+
+    <div>                     
+       Comments:
+       <div >
+          <input id="id_comment" maxlength="30" name="comments" type="text"></input>
+       </div>
+    </div>
+    <div >
+       <div >
+           <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</form>
+                
+{% endblock %}

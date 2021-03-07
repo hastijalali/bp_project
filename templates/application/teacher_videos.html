@@ -1,0 +1,21 @@
+{% extends 'application/base.html' %}
+{% block body %}
+<a href="{% url 'application:logout' %}">
+ Logout
+</a>
+
+{% for video in videos %}
+
+<div>
+  <a href="{% url 'application:teacher_video_detail' video.id %}">{{ video.caption }}</a>
+</div>
+
+{% endfor %}
+<br>
+<hr>
+<h3>
+<div>
+<a  href= "{% url 'application:teacher_video_upload' %}" style="background-color: red">upload</a>
+</div>
+</h3>
+{% endblock %}

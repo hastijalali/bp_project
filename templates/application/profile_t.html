@@ -1,0 +1,32 @@
+{% extends 'application/base_profile_t.html' %}
+
+{% block body %}
+
+    {% if error_message %}
+      <div class="alert alert-danger">
+        <strong>{{ error_message }}</strong>
+      </div>
+    {% endif %}
+        <h3>{{ user.username }}'s Assignments</h3>
+        {% if asset %}
+
+              {% for assignments,dead,idx in asset %}
+                  
+<div>
+<button  id="{{ forloop.counter }}">{{ idx }}exercise</button>
+    <table  id="{{ forloop.counter }}">
+
+          <tbody>
+            {% for assign in assignments %}
+                    <tr id="aaa">
+                    <td><a href="{% url 'application:detail_t' assign.id %}">{{ assign.name }}</a></td>
+                    </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+</div>
+            {% endfor %}
+        {% endif %}
+
+{% endblock %}

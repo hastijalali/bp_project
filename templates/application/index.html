@@ -1,0 +1,46 @@
+{% extends 'application/base.html' %}
+{% block title %}Home{% endblock %}
+{% block index_active %}active{% endblock %}
+
+{% block body %}
+                
+<h3>Log In</h3>
+{% if error_message %}
+<div class="alert alert-danger">
+<strong>{{ error_message }}</strong>
+</div>
+ {% endif %}
+<form role="form" action="{% url 'application:login'%}" method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+    <div >
+         Username:
+         <div>
+             <input id="id_username" maxlength="30" name="username" type="text">
+         </div>
+    </div>
+
+        <div >
+              Password:
+             <div>
+               <input id="id_password" maxlength="30" name="password" type="password">
+             </div>
+        </div>
+
+            <div >
+                 Identity:
+              <div >
+                 <input id="id_identity" type="radio" name="identity" value="teacher"/>Teacher
+                 <input id="id_identity" type="radio" name="identity" value="student" checked="checked"/>Student
+               </div>
+                </div>
+
+        <div >
+             <div>
+              <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+</form>
+                
+ 
+
+{% endblock %}

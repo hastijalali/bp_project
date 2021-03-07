@@ -1,0 +1,58 @@
+{% extends 'application/base_profile.html' %}
+
+{% block body %}
+
+
+    {% if error_message %}
+      <div class="alert alert-danger">
+        <strong>{{ error_message }}</strong>
+      </div>
+    {% endif %}
+        <h3>{{ user.username }}'s Assignments</h3>
+
+          {% if asset %}
+              {% for assignments,dead,idx in asset %}
+                   
+              <div>
+              <button id="{{ forloop.counter }}">{{ idx }} exercise</button>
+              <table  id="{{ forloop.counter }}">
+          <thead>
+            <tr>
+              <th>Assignment</th>
+              <th>Deadline</th>
+              <th>Solution</th>
+              <th>Points</th>
+              <th>Comments</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for assign in assignments %}
+                  <tr id="aaa">
+                  {% ifequal dead 1 %}
+                    <td><a href="{% url 'application:detail' assign.id %}">{{ assign.name }}</a></td>
+                      <td >{{ assign.deadline }}</td>
+                      {% else %}
+            <td><a href="{% url 'application:detail' assign.id %}">{{ assign.name }}</a></td>
+                      <td >{{ assign.deadline }}</td>
+                  {% endifequal %}
+
+                    {% for sol in solutions %}
+                      {% if assign.id == sol.assignment.id %}
+                        <td>{{ sol.title }}</td>
+                          {% ifnotequal sol.points 0.0 %}
+
+                          <td>{{ sol.points }}</td>
+                          {% endifnotequal %}
+                            <td>{{ sol.comments }}</td>
+                      {% endif %}
+                    {% endfor %}
+                  </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+              </div>
+              {% endfor %}
+        {% endif %}
+
+{% endblock %}
